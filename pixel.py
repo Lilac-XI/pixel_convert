@@ -15,7 +15,7 @@ n4 = np.array([[0, 1, 0],
               np.uint8)
 
 
-def make_dot(src, k=3, scale=2, color=True, blur=0, erode=0, alpha=True, to_tw=True):
+def make_dot(src, k=3, scale=2, color=True, blur=0, erode=0, alpha=True, to_tw=False):
     img_pl = Image.open(src)
     if (img_pl.mode == 'RGBA' or img_pl.mode == 'P') and alpha:
         if img_pl.mode != 'RGBA':

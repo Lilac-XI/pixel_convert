@@ -25,9 +25,11 @@
         <div class="collapse navbar-collapse" id="nav-right">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" data-toggle="modal" data-target="#info">せつめい</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#release">更新履歴</a></li>
                 <li><a href="https://twitter.com/tsutsuji815" target="_blank">Twitter</a></li>
                 <li><a href="https://github.com/tsutsuji815/pixel_convert" target="_blank">GitHub</a></li>
                 <li><a href="https://monopro.org/" target="_blank">SITE</a></li>
+                <li><a href="./?lang=en">English</a></li>
             </ul>
         </div>
     </div>
@@ -51,9 +53,6 @@
                 <ul>
                     <li>対応している画像は2MBまでのjpegとpngです</li>
                     <li>画像解像度は容量以内であれば制限はありませんが、長辺が1024pxを超えるものは1024pxに縮小されます</li>
-                    <li><s>RGBAやグレースケールのものも扱えますが、出力時にRGBに変換されます<br>
-                        なので透過は無視されます</s></li>
-                    <li>透過PNGに対応しました(2017/05/23)<br>
                     <li>「透過PNGで書き出す」にチェックを入れるとRGBAの画像は透過PNGとしてそのまま書き出されます</li>
                     <li>ただしこの時アルファチャンネルはドットのサイズに拡大され、半透明は無視されます</li>
                     <li>「Twitter用に1pxだけ透過」にチェックを入れると左上の1ピクセルだけ透明な透過PNGとして書き出します<br>
@@ -76,60 +75,171 @@
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-3">
-            <form action="./" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label>画像(最大2MBまで)<br>透過PNGに対応しました(2017/05/23)</label>
-                    <input type="file" name="image" accept='image/png,image/jpeg'>
-                </div>
-                <div class="form-group">
-                    <div>色の数</div>
-                    <label class="radio-inline"><input name="k" type="radio" value="2">2</label>
-                    <label class="radio-inline"><input name="k" type="radio" value="4" checked>4</label>
-                    <label class="radio-inline"><input name="k" type="radio" value="8">8</label>
-                    <label class="radio-inline"><input name="k" type="radio" value="16">16</label>
-                </div>
-                <div class="form-group">
-                    <div>ドットの大きさ</div>
-                    <label class="radio-inline"><input name="scale" type="radio" value="1">1</label>
-                    <label class="radio-inline"><input name="scale" type="radio" value="2" checked>2</label>
-                    <label class="radio-inline"><input name="scale" type="radio" value="3">3</label>
-                    <label class="radio-inline"><input name="scale" type="radio" value="4">4</label>
-                    <label class="radio-inline"><input name="scale" type="radio" value="5">5</label>
-                </div>
-                <div class="form-group">
-                    <div>画像を平滑化</div>
-                    <label class="radio-inline"><input name="blur" type="radio" value="0" checked>なし</label>
-                    <label class="radio-inline"><input name="blur" type="radio" value="50">弱</label>
-                    <label class="radio-inline"><input name="blur" type="radio" value="100">中</label>
-                    <label class="radio-inline"><input name="blur" type="radio" value="200">強</label>
-                </div>
-                <div class="form-group">
-                    <div>輪郭線を膨張</div>
-                    <label class="radio-inline"><input name="erode" type="radio" value="0" checked>なし</label>
-                    <label class="radio-inline"><input name="erode" type="radio" value="1">弱</label>
-                    <label class="radio-inline"><input name="erode" type="radio" value="2">強</label>
-                </div>
-                <div class="form-group">
-                    <label><input name="alpha" type="checkbox" value="1" checked>透過PNGで書き出す</label>
-                    <label><input name="to_tw" type="checkbox" value="1" checked>Twitter用に1pxだけ透過</label>
-                </div>
-                <button type="submit" class="btn btn-primary">実行</button>
-            </form>
-            <div class="add-margin-top">
-                <a href="https://twitter.com/share" class="twitter-share-button"
-                   data-url="https://app.monopro.org/pixel/" data-text="ドット絵こんばーた" data-size="large"
-                   data-hashtags="ドット絵こんばーた">Tweet</a>
-                <script>
-                    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-                </script>
-                <p>取り急ぎ付けたただのボタンなんで画像添付ツイートはちょっとまってね</p>
+<div class="modal fade in" id="release" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">更新履歴</h4>
+            </div>
+            <div class="modal-body">
+                <h5>2017/06/06</h5>
+                <ul>
+                    <li>
+                        Twitterに変換結果を直接投稿することができるようになりました(アプリ認証が必要です)<br>
+                        変換後下に出てくるテキストボックスとボタンからどうぞ<br>
+                        画像は自動でアップロードされます
+                    </li>
+                </ul>
+                <h5>2017/06/03</h5>
+                <ul>
+                    <li>
+                        ディザリング機能を試験的に実装しました<br>
+                        減色によって生まれた色の段差をパターンに置き換えて多少やんわりさせます<br>
+                        解像度が大きすぎると効果が薄いので、解像度/ドットサイズが512以下の時のみ動作します<br>
+                        アニメ塗りなどの元々階調がはっきりしているものや、減色後の色数を大きく設定した場合には効果が薄いです
+                    </li>
+                </ul>
+                <h5>2017/06/02</h5>
+                <ul>
+                    <li>UIを変更修正しました</li>
+                    <li>変換した後、変換元の画像と設定内容を保持するようになりました<br>
+                        ファイルを新たに選択せずに実行ボタンを押すと同じ画像を変換します<br>
+                        いい感じの設定を探したい時などにどうぞ
+                    </li>
+                </ul>
+                <h5>2017/05/31</h5>
+                <ul>
+                    <li>UIを変更修正しました</li>
+                </ul>
+                <h5>2017/05/29</h5>
+                <ul>
+                    <li>｢彩度を上げる｣機能を追加しました</li>
+                    <li>｢ハイコントラスト｣機能を追加しました</li>
+                </ul>
+                <h5>2017/05/24</h5>
+                <ul>
+                    <li>コードの非効率的だった部分を修正しました(少し軽くなりました)</li>
+                </ul>
+                <h5>2017/05/23</h5>
+                <ul>
+                    <li>透過pngの読み書きに対応しました(半透明は無視します)</li>
+                    <li>Twitter用に左上1ピクセルだけ透過する機能を追加しました</li>
+                    <li>使用した色をカラーコードとして吐き出すようになりました</li>
+                </ul>
+                <h5>2017/05/21</h5>
+                <ul>
+                    <li>｢輪郭線を膨張｣の機能を追加しました</li>
+                    <li>出力形式をpngで統一しました</li>
+                </ul>
+                <h5>2017/05/20</h5>
+                <ul>
+                    <li>公開しました</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 clearfix">
+            <form action="./" method="post" enctype="multipart/form-data">
+                <div class="form-group col-xs-12">
+                    <a id="file_select" class="btn btn-default">
+                        <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> 画像を開く
+                    </a>
+                    <span id="file_info" class="help-block">4MBまでのjpg又はpngを選択してください</span>
+                    {% if org_img %}
+                        <input type="text" name="prev_img" value="{{org_img}}" style="display:none;">
+                    {% else %}
+                        <input type="text" name="prev_img" value="" style="display:none;">
+                    {% endif %}
+                    <input type="file" name="image" id="file" accept='image/png,image/jpeg' style="display:none;">
+                    <input type="text" name="resume" id="resume" style="display:none;">
+                </div>
+                <div class="form-group col-xs-6">
+                    <label class="control-label" for="k">色の数</label>
+                    <select class="form-control" id="k" name="k">
+                        <option value="2" {% if k==2 %} selected="selected" {% endif %}>2</option>
+                        <option value="4" {% if (not k) or (k==4) %} selected="selected" {% endif %}>4</option>
+                        <option value="8" {% if k==8 %} selected="selected" {% endif %}>8</option>
+                        <option value="16" {% if k==16 %} selected="selected" {% endif %}>16</option>
+                    </select>
+                </div>
+                <div class="form-group col-xs-6">
+                    <label for="scale">ドットの大きさ</label>
+                    <select class="form-control" id="scale" name="scale">
+                        <option value="1" {% if scale==1 %} selected="selected" {% endif %}>1</option>
+                        <option value="2" {% if (not scale) or (scale==2) %} selected="selected" {% endif %}>2</option>
+                        <option value="3" {% if scale==3 %} selected="selected" {% endif %}>3</option>
+                        <option value="4" {% if scale==4 %} selected="selected" {% endif %}>4</option>
+                    </select>
+                </div>
+                <div class="form-group col-xs-6">
+                    <label for="blur">画像を平滑化</label>
+                    <select class="form-control" id="blur" name="blur">
+                        <option value="0" {% if (not blur) or (blur==0) %} selected="selected" {% endif %}>なし</option>
+                        <option value="50" {% if blur==50 %} selected="selected" {% endif %}>弱</option>
+                        <option value="100" {% if blur==100 %} selected="selected" {% endif %}>中</option>
+                        <option value="200" {% if blur==200 %} selected="selected" {% endif %}>強</option>
+                    </select>
+                </div>
+                <div class="form-group col-xs-6">
+                    <label for="erode">輪郭線を膨張</label>
+                    <select class="form-control" id="erode" name="erode">
+                        <option value="0" {% if (not erode) or (erode==0) %} selected="selected" {% endif %}>なし</option>
+                        <option value="1" {% if erode==1 %} selected="selected" {% endif %}>弱</option>
+                        <option value="2" {% if erode==2 %} selected="selected" {% endif %}>強</option>
+                    </select>
+                </div>
+                <div class="form-group col-xs-6">
+                    <label for="saturation">彩度を上げる</label>
+                    <select class="form-control" id="saturation" name="saturation">
+                        <option value="0" selected="selected">なし</option>
+                        <option value="1.5">弱</option>
+                        <option value="2.0">強</option>
+                    </select>
+                </div>
+                <div class="form-group col-xs-6">
+                    <label for="contrast">ハイコントラスト</label>
+                    <select class="form-control" id="contrast" name="contrast">
+                        <option value="0" selected="selected">なし</option>
+                        <option value="1.25">弱</option>
+                        <option value="1.5">強</option>
+                    </select>
+                </div>
+                <div class="form-group col-xs-12">
+                    <div class="checkbox">
+                        <label><input id="dither" name="dither" type="checkbox" value="1">ディザリング</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input id="alpha" name="alpha" type="checkbox" value="1" checked>透過PNGで書き出す</label>
+                    </div>
+                    <!-- <div class="checkbox">
+                        <label><input id="to_tw" name="to_tw" type="checkbox" value="1" checked>Twitter用に1pxだけ透過</label>
+                    </div> -->
+                </div>
+                <div class="form-group col-xs-12">
+                <button type="submit" id="submit" class="btn btn-primary btn-block">
+                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> 変換する
+                </button>
+                <div class="add-margin-top">
+                    <a href="https://twitter.com/share" class="twitter-share-button"
+                       data-url="https://app.monopro.org/pixel/" data-text="ドット絵こんばーた" data-size="large"
+                       data-hashtags="ドット絵こんばーた">Tweet</a>
+                </div>
+                </div>
+            </form>
+        </div>
         {% if result %}
-        <div class="col-md-9 add-margin-top">
+        <div class="col-md-8 add-margin-top">
             <ul class="nav nav-tabs">
                 <li class="nav-item active">
                     <a href="#result" class="nav-link" data-toggle="tab">出力結果</a>
@@ -155,32 +265,14 @@
             </div>
         </div>
         {% else %}
-        <div class="col-md-9">
-            <a class="twitter-timeline"
-               href="https://twitter.com/search?q=%E3%83%89%E3%83%83%E3%83%88%E7%B5%B5%E3%81%93%E3%82%93%E3%81%B0%E3%83%BC%E3%81%9F%2Capp.monopro.org"
-               data-widget-id="865822650572054529" data-chrome="nofooter noborders">#ドット絵こんばーた</a>
-            <script>
-                !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-            </script>
-        </div>
-        {% endif %}
-        {% if error %}
-        <div class="modal fade in" id="alert" tabindex="-1">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            {{ error }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         {% endif %}
     </div>
+    
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/js.cookie.js"></script>
+<script src="static/js/script.js"></script>
 {% if error %}
 <script>
     $(document).ready(function (){

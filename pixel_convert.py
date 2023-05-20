@@ -18,7 +18,10 @@ def index():
 
 @app.route('/', methods=['POST'])
 def post():
-    img = request.files['image']
+    if (request.form['prev_img'] != "") & (not request.files['image']):
+        img = Image.open(request.form['prev_img'])
+    else:
+        img = request.files['image']
     if not img:
         error='ファイルを選択してね'
         return render_template('pixel.html', error=error)
@@ -35,16 +38,19 @@ def post():
     except:
         to_tw = False
     img_name = hashlib.md5(str(dt.datetime.now()).encode('utf-8')).hexdigest()
-    img_path = os.path.join('static/img', img_name + os.path.splitext(img.filename)[-1])
+    if (request.form['prev_img'] != "") & (not request.files['image']):
+        img_path =request.form['prev_img']
+    else:
+        img_path = os.path.join('static/img', img_name + os.path.splitext(img.filename)[-1])
     result_path = os.path.join('static/results', img_name + '.png')
     img.save(img_path)
     with Image.open(img_path) as img_pl:
         if max(img_pl.size) > 1024:
             img_pl.thumbnail((1024, 1024), Image.ANTIALIAS)
             img_pl.save(img_path)
-    img_res, colors = make_dot(img_path, k=k, scale=scale, blur=blur, erode=erode, alpha=alpha, to_tw=to_tw)
+    img_res, colors = make_dot(img_path, k=k, scale=scale, blur=blur, erode=erode, alpha=alpha)
     cv2.imwrite(result_path, img_res)
-    return render_template('pixel.html', org_img=img_path, result=result_path, colors=colors)
+    return render_template('pixel.html', org_img=img_path, result=result_path, colors=colors, k=k,scale=scale,blur=blur,erode=erode)
 
 
 @app.errorhandler(413)

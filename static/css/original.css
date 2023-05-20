@@ -1,3 +1,7 @@
 .add-margin-top {
     margin-top: 15px;
 }
+
+#file_info {
+    word-break: break-all;
+}
