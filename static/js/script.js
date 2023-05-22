@@ -56,4 +56,60 @@ $(document).ready(function (){
             Cookies.set('form_dither', 0);
         }
     });
+ 
 });
+   // ドラッグ&ドロップエリアの取得
+   var fileArea = document.getElementById('dropArea');
+
+   // input[type=file]の取得
+   var fileInput = document.getElementById('uploadFile');
+
+   var previw = document.querySelector('#preview-box img');
+   
+   // ドラッグオーバー時の処理
+   fileArea.addEventListener('dragover', function(e){
+       e.preventDefault();
+       fileArea.classList.add('dragover');
+   });
+   
+   // ドラッグアウト時の処理
+   fileArea.addEventListener('dragleave', function(e){
+       e.preventDefault();
+       fileArea.classList.remove('dragover');
+   });
+   
+   // ドロップ時の処理
+   fileArea.addEventListener('drop', function(e){
+       e.preventDefault();
+       fileArea.classList.remove('dragover');
+   
+       // ドロップしたファイルの取得
+       var files = e.dataTransfer.files;
+       console.log(files);
+   
+       // 取得したファイルをinput[type=file]へ
+       fileInput.files = files;
+       
+       if(typeof files[0] !== 'undefined') {
+        console.log("セット!")
+        console.log(fileInput.files[0])
+        previw.src = URL.createObjectURL(files[0]);
+           //ファイルが正常に受け取れた際の処理
+       } else {
+           //ファイルが受け取れなかった際の処理
+       }
+   });
+   
+   // input[type=file]に変更があれば実行
+   // もちろんドロップ以外でも発火します
+   fileInput.addEventListener('change', function(e){
+       var file = e.target.files[0];
+       
+       if(typeof e.target.files[0] !== 'undefined') {
+           // ファイルが正常に受け取れた際の処理
+           console.log("変更あり！")
+       } else {
+           console.log("エラー!!");
+           // ファイルが受け取れなかった際の処理
+       }
+   }, false);

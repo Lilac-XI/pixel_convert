@@ -18,10 +18,10 @@ def index():
 
 @app.route('/', methods=['POST'])
 def post():
-    if (request.form['prev_img'] != "") & (not request.files['image']):
+    if (request.form['prev_img'] != "") & (not request.files['uploadFile']):
         img = Image.open(request.form['prev_img'])
     else:
-        img = request.files['image']
+        img = request.files['uploadFile']
     if not img:
         error='ファイルを選択してね'
         return render_template('pixel.html', error=error)
@@ -38,7 +38,7 @@ def post():
     except:
         to_tw = False
     img_name = hashlib.md5(str(dt.datetime.now()).encode('utf-8')).hexdigest()
-    if (request.form['prev_img'] != "") & (not request.files['image']):
+    if (request.form['prev_img'] != "") & (not request.files['uploadFile']):
         img_path =request.form['prev_img']
     else:
         img_path = os.path.join('static/img', img_name + os.path.splitext(img.filename)[-1])

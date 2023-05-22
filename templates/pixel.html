@@ -152,16 +152,22 @@
         <div class="col-md-4 clearfix">
             <form action="./" method="post" enctype="multipart/form-data">
                 <div class="form-group col-xs-12">
-                    <a id="file_select" class="btn btn-default">
-                        <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> 画像を開く
-                    </a>
-                    <span id="file_info" class="help-block">4MBまでのjpg又はpngを選択してください</span>
                     {% if org_img %}
                         <input type="text" name="prev_img" value="{{org_img}}" style="display:none;">
                     {% else %}
                         <input type="text" name="prev_img" value="" style="display:none;">
                     {% endif %}
-                    <input type="file" name="image" id="file" accept='image/png,image/jpeg' style="display:none;">
+                    <div id="upFileWrap">
+                        <div id="inputFile">
+                            <!-- ドラッグ&ドロップエリア -->
+                            <p id="dropArea">ここにファイルをドロップしてください,<br><span id="file_info" class="help-block">4MBまでのjpg又はpngを選択してください</span></p>
+                    
+                            <input type="file" name="uploadFile" id="uploadFile" style="display:none;">
+                        </div>
+                    </div>
+                    <div id="preview-box">
+                        <img id="preview">
+                    </div>
                     <input type="text" name="resume" id="resume" style="display:none;">
                 </div>
                 <div class="form-group col-xs-6">
@@ -230,11 +236,6 @@
                 <button type="submit" id="submit" class="btn btn-primary btn-block">
                     <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> 変換する
                 </button>
-                <div class="add-margin-top">
-                    <a href="https://twitter.com/share" class="twitter-share-button"
-                       data-url="https://app.monopro.org/pixel/" data-text="ドット絵こんばーた" data-size="large"
-                       data-hashtags="ドット絵こんばーた">Tweet</a>
-                </div>
                 </div>
             </form>
         </div>

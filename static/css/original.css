@@ -1,3 +1,36 @@
+#inputFile {
+    position: relative;
+    padding: 20px 0 50px;
+    text-align: center;
+}
+
+#dropArea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 10px 0 0;
+    border: 2px dashed #494949;
+    background: rgba(22, 165, 191, 0);
+    transition: all 0.25s cubic-bezier(0.21, 0.51, 0.51, 1);
+}
+#uploadFile {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    display: block;
+    width: 300px;
+    height: 0px;
+    opacity: 0;
+}
+
+#dropArea.dragover {
+    border: 2px solid #16a5bf;
+    background: rgba(22, 165, 191, 0.6);
+}
+
 .add-margin-top {
     margin-top: 15px;
 }
@@ -5,3 +38,17 @@
 #file_info {
     word-break: break-all;
 }
+
+#preview-box {
+    width: 100;
+    min-height: 100;
+    margin: 5px auto;
+    padding: 5px;
+    border: 2px dashed #333;
+    border-radius: 8px;
+  }
+
+  #preview-box img {
+    width: 100%;
+    object-fit: cover;
+  }
