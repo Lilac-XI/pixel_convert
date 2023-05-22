@@ -1,6 +1,7 @@
 # coding:utf-8
 from flask import Flask, render_template, request, redirect, url_for, abort, logging
 import os
+import shutil
 import cv2
 from PIL import Image
 import hashlib
@@ -19,12 +20,21 @@ def index():
 @app.route('/', methods=['POST'])
 def post():
     if (request.form['prev_img'] != "") & (not request.files['uploadFile']):
+        # 前回と同じ画像の使いまわし！
         img = Image.open(request.form['prev_img'])
     else:
+        # 新しい画像の送信！
+        # 前の画像がimgディレクトリにのこってたら削除！
+        shutil.rmtree('static/img')
+        os.mkdir('static/img')
         img = request.files['uploadFile']
     if not img:
         error='ファイルを選択してね'
         return render_template('pixel.html', error=error)
+    # 前回の生成画像を削除
+    shutil.rmtree('static/results')
+    os.mkdir('static/results')
+
     k = int(request.form['k'])
     scale = int(request.form['scale'])
     blur = int(request.form['blur'])
