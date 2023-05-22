@@ -22,12 +22,14 @@ def post():
     if (request.form['prev_img'] != "") & (not request.files['uploadFile']):
         # 前回と同じ画像の使いまわし！
         img = Image.open(request.form['prev_img'])
+        filename =request.form['prev_img'].replace('static/img/','').replace('.png','')
     else:
         # 新しい画像の送信！
         # 前の画像がimgディレクトリにのこってたら削除！
         shutil.rmtree('static/img')
         os.mkdir('static/img')
         img = request.files['uploadFile']
+        filename = img.filename.replace('.png','')
     if not img:
         error='ファイルを選択してね'
         return render_template('pixel.html', error=error)
@@ -47,11 +49,11 @@ def post():
         to_tw = bool(int(request.form['to_tw']))
     except:
         to_tw = False
-    img_name = hashlib.md5(str(dt.datetime.now()).encode('utf-8')).hexdigest()
+    img_name = filename + "_" + request.form['k'] + "_" + request.form['scale'] + "_" + request.form['blur'] + "_" + request.form['erode']
     if (request.form['prev_img'] != "") & (not request.files['uploadFile']):
         img_path =request.form['prev_img']
     else:
-        img_path = os.path.join('static/img', img_name + os.path.splitext(img.filename)[-1])
+        img_path = os.path.join('static/img', filename + os.path.splitext(img.filename)[-1])
     result_path = os.path.join('static/results', img_name + '.png')
     img.save(img_path)
     with Image.open(img_path) as img_pl:
